@@ -1,0 +1,13 @@
+version: '3'
+services:
+    servent:
+        image: purvesta/nlanrc:latest
+        networks:
+            backend:
+        ports:
+        #- "1099"
+networks:
+    backend:
+        ipam:
+            config:
+            - subnet: 172.20.0.0/24

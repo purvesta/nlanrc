@@ -1,0 +1,14 @@
+appdirs==1.4.4
+cfgv==3.2.0
+distlib==0.3.1
+docopt==0.6.2
+filelock==3.0.12
+identify==1.5.0
+nodeenv==1.5.0
+pre-commit==2.7.1
+Pyro4==4.80
+PyYAML==5.3.1
+serpent==1.30.2
+six==1.15.0
+toml==0.10.1
+virtualenv==20.0.31
