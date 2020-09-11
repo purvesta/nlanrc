@@ -19,10 +19,9 @@ nlanrc
 import logging
 from logging import StreamHandler
 
+from client.client import Client
 from docopt import docopt
-
-# from client import Client
-# from server import Server
+from server.server import Server
 
 __version__ = "0.0.1"
 
@@ -42,12 +41,14 @@ def main():
     if arguments.get("server"):
         log.debug("We are a server!")
         log.debug("Running on: {} port: {}".format("localhost", port))
-        # Server(port)
+        server = Server(port)
+        server.serve()
     else:
         server_ip = arguments.get("<server_ip>")
         log.debug("We are a client!")
         log.debug("Running on: {} port: {}".format(server_ip, port))
-        # Client(server_ip, port)
+        client = Client(server_ip, port)
+        client.run()
 
 
 if __name__ == "__main__":
