@@ -1,6 +1,7 @@
 import logging
 
 import Pyro4
+from client.lolcat.lolcat import LolCat
 
 
 class Client:
@@ -13,14 +14,22 @@ class Client:
         self.server_ip = server_ip
         self.server = None
 
+    def welcome(self):
+        """Print welcome."""
+        lol = LolCat()
+        lol.cat("WELCOMEEEEEEE")
+
     def run(self):
         """Run the client interface."""
         uri = "PYRO:nlanrc.server@{}:{}".format(self.server_ip, self.registry_port)
         self.server = Pyro4.Proxy(uri)
+        self.welcome()
         while True:
             command = input("nlanrc > ").strip()
             ret = self.run_command(command)
             if ret is None:
+                print("Command doesn't exist.")
+            if ret == -1:
                 print("Invalid command syntax.")
             else:
                 print(ret)
@@ -30,7 +39,7 @@ class Client:
 
         # Make sure we have the correct syntax
         if command[0] != "/":
-            return None
+            return -1
 
         if command[1:].lower() == "ping":
             return self.ping()
